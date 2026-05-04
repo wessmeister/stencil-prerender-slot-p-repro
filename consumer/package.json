@@ -1,0 +1,18 @@
+{
+  "name": "repro-consumer",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "copy-bundle": "node scripts/copy-bundle.mjs",
+    "prerender": "node scripts/prerender.mjs",
+    "serve": "serve public -p 4568 --no-port-switching",
+    "start": "npm run copy-bundle && npm run prerender && npm run serve"
+  },
+  "dependencies": {
+    "repro-components": "*"
+  },
+  "devDependencies": {
+    "serve": "14.2.5"
+  }
+}

@@ -1,9 +1,12 @@
 node_modules
-.stencil
-src/components.d.ts
-hydrate
-www
-dist
-loader
-lib
 package-lock.json
+.stencil
+
+# component build artifacts
+components/dist
+components/loader
+components/hydrate
+components/src/components.d.ts
+
+# consumer build artifacts
+consumer/public/build
