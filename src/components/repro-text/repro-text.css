@@ -1,0 +1,8 @@
+:host {
+  display: inline-block;
+}
+
+.repro-text {
+  margin: 0;
+  font: 14px/24px system-ui, sans-serif;
+}

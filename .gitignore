@@ -1,0 +1,9 @@
+node_modules
+.stencil
+src/components.d.ts
+hydrate
+www
+dist
+loader
+lib
+package-lock.json

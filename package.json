@@ -1,0 +1,14 @@
+{
+  "name": "stencil-prerender-repro",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "stencil build && node scripts/prerender.mjs && serve www -p 4567"
+  },
+  "devDependencies": {
+    "@stencil/core": "4.43.2",
+    "serve": "14.2.5",
+    "typescript": "5.6.3"
+  }
+}
