@@ -10,7 +10,7 @@
     "start": "npm run copy-bundle && npm run prerender && npm run serve"
   },
   "dependencies": {
-    "@cosmos/web-scoped": "file:../../../../Dev/cosmos/@cosmos/web-scoped"
+    "repro-components": "*"
   },
   "devDependencies": {
     "serve": "14.2.5"
