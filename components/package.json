@@ -6,14 +6,14 @@
   "main": "loader/index.cjs.js",
   "module": "loader/index.js",
   "types": "loader/index.d.ts",
-  "files": ["dist", "loader", "hydrate"],
+  "files": ["dist", "loader", "lib", "hydrate"],
   "exports": {
     ".": {
-      "types": "./loader/index.d.ts",
-      "import": "./loader/index.js",
-      "require": "./loader/index.cjs.js"
+      "types": "./lib/custom-elements/index.d.ts",
+      "import": "./lib/custom-elements/index.js"
     },
     "./loader": "./loader/index.js",
+    "./custom-elements": "./lib/custom-elements/index.js",
     "./hydrate": "./hydrate/index.mjs",
     "./package.json": "./package.json"
   },

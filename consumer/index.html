@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Stencil prerender repro: badge label drops below pill</title>
+    <script>
+      // Simulate a runtime without Constructable Stylesheets (older Safari, some WebViews).
+      // Stencil's `addStyle` falls through to inserting a <style> element into the shadow
+      // root, which makes `initializeClientHydrate`'s populate-shadow block skip
+      // (`!shadowRoot.childNodes.length` becomes false). The scoped prerender residue
+      // therefore stays in light DOM as a slotted child of repro-text.
+      Object.defineProperty(document, 'adoptedStyleSheets', { configurable: true, get() { return undefined; } });
+    </script>
+    <script type="module">
+      import { defineCustomElement as defineBadge } from '/build/custom-elements/repro-badge.js';
+      import { defineCustomElement as defineText } from '/build/custom-elements/repro-text.js';
+      import { defineCustomElement as defineMode } from '/build/custom-elements/repro-mode.js';
+      defineBadge();
+      defineText();
+      defineMode();
+    </script>
+    <style>
+      body { font: 14px/1.4 system-ui, sans-serif; padding: 24px; }
+      h1 { font-size: 16px; margin: 0 0 16px; }
+    </style>
+  </head>
+  <body>
+    <h1>Stencil prerender repro: badge label drops below pill</h1>
+    <repro-mode mode="light">
+      <repro-badge>Snowboarding</repro-badge>
+    </repro-mode>
+  </body>
+</html>

@@ -4,9 +4,10 @@ package-lock.json
 
 # component build artifacts
 components/dist
+components/lib
 components/loader
 components/hydrate
 components/src/components.d.ts
 
 # consumer build artifacts
-consumer/public/build
+consumer/public

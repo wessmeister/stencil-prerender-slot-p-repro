@@ -1,9 +1,20 @@
-import { renderToString } from 'repro-components/hydrate';
-import { readFile, writeFile } from 'node:fs/promises';
+import { createWindowFromHtml, hydrateDocument } from 'repro-components/hydrate';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 
-const file = fileURLToPath(new URL('../public/index.html', import.meta.url));
-const source = await readFile(file, 'utf-8');
-const { html } = await renderToString(source, { serializeShadowRoot: 'scoped' });
-await writeFile(file, html, 'utf-8');
-console.log(`Prerendered ${file}`);
+const sourceFile = fileURLToPath(new URL('../index.html', import.meta.url));
+const outFile = fileURLToPath(new URL('../public/index.html', import.meta.url));
+const source = await readFile(sourceFile, 'utf-8');
+
+// Mirror the production rb3ca-prerender flow: jsdom-like document, hydrateDocument with
+// scoped serialization and clientHydrateAnnotations.
+const win = createWindowFromHtml(source, 'prerender-' + Date.now());
+const doc = win.document;
+await hydrateDocument(doc, {
+  serializeShadowRoot: { default: 'declarative-shadow-dom', scoped: ['repro-text'] },
+  clientHydrateAnnotations: true,
+});
+const html = '<!doctype html>' + doc.documentElement.outerHTML;
+await mkdir(fileURLToPath(new URL('../public', import.meta.url)), { recursive: true });
+await writeFile(outFile, html, 'utf-8');
+console.log(`Prerendered ${outFile}`);
