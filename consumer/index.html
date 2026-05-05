@@ -3,31 +3,38 @@
   <head>
     <meta charset="utf-8" />
     <title>Stencil prerender repro: badge label drops below pill</title>
-    <script>
-      // Simulate a runtime without Constructable Stylesheets (older Safari, some WebViews).
-      // Stencil's `addStyle` falls through to inserting a <style> element into the shadow
-      // root, which makes `initializeClientHydrate`'s populate-shadow block skip
-      // (`!shadowRoot.childNodes.length` becomes false). The scoped prerender residue
-      // therefore stays in light DOM as a slotted child of repro-text.
-      Object.defineProperty(document, 'adoptedStyleSheets', { configurable: true, get() { return undefined; } });
-    </script>
     <script type="module">
-      import { defineCustomElement as defineBadge } from '/build/custom-elements/repro-badge.js';
-      import { defineCustomElement as defineText } from '/build/custom-elements/repro-text.js';
-      import { defineCustomElement as defineMode } from '/build/custom-elements/repro-mode.js';
+      import { defineCustomElement as defineMode } from '/build/custom-elements/cosmos-mode-13-0-2.js';
+      import { defineCustomElement as defineBadge } from '/build/custom-elements/cosmos-badge-13-0-2.js';
+      import { defineCustomElement as defineText } from '/build/custom-elements/cosmos-text-13-0-2.js';
+      import { defineCustomElement as defineIcon } from '/build/custom-elements/cosmos-icon-label-13-0-2.js';
+      defineMode();
       defineBadge();
       defineText();
-      defineMode();
+      defineIcon();
     </script>
     <style>
       body { font: 14px/1.4 system-ui, sans-serif; padding: 24px; }
       h1 { font-size: 16px; margin: 0 0 16px; }
+      .stack > * { display: block; margin: 4px 0; }
     </style>
   </head>
   <body>
     <h1>Stencil prerender repro: badge label drops below pill</h1>
-    <repro-mode mode="light">
-      <repro-badge>Snowboarding</repro-badge>
-    </repro-mode>
+    <cosmos-mode-13-0-2 mode="light">
+      <div class="stack">
+        <cosmos-badge-13-0-2 shape="pill"><cosmos-icon-label-13-0-2 slot="prefix"></cosmos-icon-label-13-0-2>One</cosmos-badge-13-0-2>
+        <cosmos-badge-13-0-2 shape="pill"><cosmos-icon-label-13-0-2 slot="prefix"></cosmos-icon-label-13-0-2>Two</cosmos-badge-13-0-2>
+        <cosmos-badge-13-0-2 shape="pill"><cosmos-icon-label-13-0-2 slot="prefix"></cosmos-icon-label-13-0-2>Three</cosmos-badge-13-0-2>
+        <cosmos-badge-13-0-2 shape="pill"><cosmos-icon-label-13-0-2 slot="prefix"></cosmos-icon-label-13-0-2>Four</cosmos-badge-13-0-2>
+        <cosmos-badge-13-0-2 shape="pill"><cosmos-icon-label-13-0-2 slot="prefix"></cosmos-icon-label-13-0-2>Five</cosmos-badge-13-0-2>
+        <cosmos-badge-13-0-2 shape="pill"><cosmos-icon-label-13-0-2 slot="prefix"></cosmos-icon-label-13-0-2>Six</cosmos-badge-13-0-2>
+        <cosmos-badge-13-0-2 shape="pill"><cosmos-icon-label-13-0-2 slot="prefix"></cosmos-icon-label-13-0-2>Seven</cosmos-badge-13-0-2>
+        <cosmos-badge-13-0-2 shape="pill"><cosmos-icon-label-13-0-2 slot="prefix"></cosmos-icon-label-13-0-2>Eight</cosmos-badge-13-0-2>
+        <cosmos-badge-13-0-2 shape="pill"><cosmos-icon-label-13-0-2 slot="prefix"></cosmos-icon-label-13-0-2>Nine</cosmos-badge-13-0-2>
+        <cosmos-badge-13-0-2 shape="pill"><cosmos-icon-label-13-0-2 slot="prefix"></cosmos-icon-label-13-0-2>Ten</cosmos-badge-13-0-2>
+        <cosmos-badge-13-0-2 shape="pill"><cosmos-icon-label-13-0-2 slot="prefix"></cosmos-icon-label-13-0-2>Snowboarding</cosmos-badge-13-0-2>
+      </div>
+    </cosmos-mode-13-0-2>
   </body>
 </html>

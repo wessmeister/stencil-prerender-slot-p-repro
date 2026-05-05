@@ -1,4 +1,4 @@
-import { createWindowFromHtml, hydrateDocument } from 'repro-components/hydrate';
+import { createWindowFromHtml, hydrateDocument } from '@cosmos/web-scoped/hydrate/index.mjs';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 
@@ -11,7 +11,7 @@ const source = await readFile(sourceFile, 'utf-8');
 const win = createWindowFromHtml(source, 'prerender-' + Date.now());
 const doc = win.document;
 await hydrateDocument(doc, {
-  serializeShadowRoot: { default: 'declarative-shadow-dom', scoped: ['repro-text'] },
+  serializeShadowRoot: 'scoped',
   clientHydrateAnnotations: true,
 });
 const html = '<!doctype html>' + doc.documentElement.outerHTML;
